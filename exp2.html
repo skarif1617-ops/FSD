@@ -1,0 +1,125 @@
+import React, { Component, useState } from "react";
+import "./App.css";
+
+// 1. Class Component Counter
+class ClassCounter extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      count: 0
+    };
+
+    this.incrementCount = this.incrementCount.bind(this);
+  }
+
+  incrementCount() {
+    this.setState((prevState) => ({
+      count: prevState.count + 1
+    }));
+  }
+
+  render() {
+    return (
+      <div className="section">
+        <h2>1. Class Component Counter</h2>
+
+        <p>Current Count: {this.state.count}</p>
+
+        <button onClick={this.incrementCount}>
+          Increment
+        </button>
+      </div>
+    );
+  }
+}
+
+// 2. Functional Component Counter
+function CounterButtonFunc() {
+  const [count, setCount] = useState(0);
+
+  return (
+    <div className="section">
+      <h2>2. Functional Component Counter</h2>
+
+      <button onClick={() => setCount(count + 1)}>
+        Count: {count}
+      </button>
+    </div>
+  );
+}
+
+// 3. Button Click Event
+function ButtonClickHandler() {
+  const handleClick = () => {
+    alert("Button was clicked!");
+  };
+
+  return (
+    <div className="section">
+      <h2>3. Button Click Event</h2>
+
+      <button onClick={handleClick}>
+        Click Me
+      </button>
+    </div>
+  );
+}
+
+// 4. Conditional Rendering
+function ConditionalRender() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  return (
+    <div className="section">
+      <h2>4. Conditional Rendering</h2>
+
+      {isLoggedIn ? (
+        <p>Welcome, User!</p>
+      ) : (
+        <p>Please Login</p>
+      )}
+
+      <button onClick={() => setIsLoggedIn(!isLoggedIn)}>
+        {isLoggedIn ? "Logout" : "Login"}
+      </button>
+    </div>
+  );
+}
+
+// 5. String Literals
+function StringLiterals() {
+  const name = "Saritha";
+  const age = 21;
+
+  return (
+    <div className="section">
+      <h2>5. Using String Literals</h2>
+
+      <p>
+        Hello, my name is {name} and I am {age} years old.
+      </p>
+    </div>
+  );
+}
+
+// Main App Component
+function App() {
+  return (
+    <div className="App">
+      <h1>React Concepts Demonstration</h1>
+
+      <ClassCounter />
+
+      <CounterButtonFunc />
+
+      <ButtonClickHandler />
+
+      <ConditionalRender />
+
+      <StringLiterals />
+    </div>
+  );
+}
+
+export default App;
