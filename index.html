@@ -1,0 +1,913 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🚀 Web Development Learning Hub - Master Frontend Development</title>
+    <meta name="description" content="Learn HTML, CSS, JavaScript, React with interactive projects. Perfect for beginners to intermediate developers.">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #6366f1;
+            --secondary: #8b5cf6;
+            --accent: #ec4899;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --dark: #1f2937;
+            --light: #f9fafb;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+        }
+
+        /* ===== NAVIGATION ===== */
+        nav {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 600;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        nav a:hover {
+            color: var(--primary);
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: width 0.3s;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        /* ===== HERO SECTION ===== */
+        .hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 6rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(255,255,255,0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(255,255,255,0.1) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            animation: slideDown 0.8s ease-out;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+            animation: slideUp 0.8s ease-out 0.2s both;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            animation: slideUp 0.8s ease-out 0.4s both;
+        }
+
+        .btn {
+            padding: 0.8rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: white;
+            color: var(--primary);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn-secondary:hover {
+            background: white;
+            color: var(--primary);
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ===== SECTIONS ===== */
+        section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            text-align: center;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* ===== PROJECTS GRID ===== */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .project-card {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            transition: all 0.3s;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+
+        .project-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .project-card h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .project-card p {
+            color: #6b7280;
+            margin-bottom: 1.5rem;
+        }
+
+        .skill-tag {
+            display: inline-block;
+            background: #f0f4ff;
+            color: var(--primary);
+            padding: 0.4rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            margin-right: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .project-time {
+            color: var(--warning);
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-top: 1rem;
+        }
+
+        /* ===== ROADMAP SECTION ===== */
+        .roadmap {
+            background: white;
+            border-radius: 15px;
+            padding: 3rem;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            margin-bottom: 2rem;
+        }
+
+        .roadmap-item {
+            display: flex;
+            margin-bottom: 2rem;
+            gap: 2rem;
+            position: relative;
+        }
+
+        .roadmap-item::before {
+            content: '';
+            position: absolute;
+            left: 30px;
+            top: 60px;
+            width: 2px;
+            height: calc(100% + 2rem);
+            background: linear-gradient(180deg, var(--primary), var(--accent));
+        }
+
+        .roadmap-item:last-child::before {
+            display: none;
+        }
+
+        .roadmap-number {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            flex-shrink: 0;
+            position: relative;
+            z-index: 10;
+        }
+
+        .roadmap-content h3 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .roadmap-content p {
+            color: #6b7280;
+        }
+
+        /* ===== SKILLS SECTION ===== */
+        .skills-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .skill-box {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            transition: all 0.3s;
+        }
+
+        .skill-box:hover {
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            transform: translateY(-5px);
+        }
+
+        .skill-box h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .skill-box ul {
+            list-style: none;
+        }
+
+        .skill-box li {
+            padding: 0.5rem 0;
+            color: #6b7280;
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        .skill-box li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--success);
+            font-weight: bold;
+        }
+
+        /* ===== PROGRESS TRACKER ===== */
+        .tracker {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        }
+
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            padding: 0.8rem;
+            margin-bottom: 0.5rem;
+            border-radius: 8px;
+            transition: background 0.3s;
+        }
+
+        .checkbox-item:hover {
+            background: #f0f4ff;
+        }
+
+        .checkbox-item input {
+            width: 20px;
+            height: 20px;
+            margin-right: 1rem;
+            cursor: pointer;
+            accent-color: var(--primary);
+        }
+
+        /* ===== FEATURES SECTION ===== */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .feature {
+            text-align: center;
+            padding: 2rem;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            transition: all 0.3s;
+        }
+
+        .feature:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        /* ===== FOOTER ===== */
+        footer {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            text-align: center;
+            padding: 3rem 2rem;
+            margin-top: 4rem;
+        }
+
+        footer h2 {
+            color: white;
+            margin-bottom: 1rem;
+            background: none;
+            -webkit-text-fill-color: unset;
+        }
+
+        footer p {
+            margin-bottom: 1rem;
+            opacity: 0.9;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 1.5rem;
+        }
+
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .social-links a:hover {
+            background: white;
+            color: var(--primary);
+            transform: scale(1.2);
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            h2 {
+                font-size: 2rem;
+            }
+
+            nav ul {
+                gap: 1rem;
+            }
+
+            .roadmap-item {
+                gap: 1rem;
+            }
+
+            .roadmap-item::before {
+                left: 20px;
+            }
+
+            .roadmap-number {
+                width: 60px;
+                height: 60px;
+            }
+
+            section {
+                padding: 2rem 1rem;
+            }
+        }
+
+        /* ===== SMOOTH SCROLL ===== */
+        .scroll-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: white;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.5rem;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+            transition: all 0.3s;
+            z-index: 999;
+        }
+
+        .scroll-top:hover {
+            transform: scale(1.1);
+        }
+
+        .scroll-top.show {
+            display: flex;
+        }
+    </style>
+</head>
+<body>
+
+<!-- ===== NAVIGATION ===== -->
+<nav>
+    <ul>
+        <li><a href="#projects">📚 Projects</a></li>
+        <li><a href="#roadmap">🗺️ Roadmap</a></li>
+        <li><a href="#skills">🎯 Skills</a></li>
+        <li><a href="#tracker">✅ Progress</a></li>
+        <li><a href="#resources">📖 Resources</a></li>
+    </ul>
+</nav>
+
+<!-- ===== HERO SECTION ===== -->
+<section class="hero">
+    <div class="hero-content">
+        <h1>🚀 Web Development Learning Hub</h1>
+        <p>Master Frontend Development: HTML, CSS, JavaScript & React with Interactive Projects</p>
+        <div class="cta-buttons">
+            <a href="#projects" class="btn btn-primary">🚀 Get Started</a>
+            <a href="#roadmap" class="btn btn-secondary">📍 See Roadmap</a>
+        </div>
+    </div>
+</section>
+
+<!-- ===== PROJECTS SECTION ===== -->
+<section id="projects">
+    <h2>📚 Our Learning Projects</h2>
+    <div class="projects-grid">
+        <!-- Project 1 -->
+        <div class="project-card">
+            <div class="project-icon">🧪</div>
+            <h3>JavaScript Lab Programs</h3>
+            <p>Master DOM manipulation, event listeners, and function types with 5 hands-on labs.</p>
+            <div>
+                <span class="skill-tag">DOM</span>
+                <span class="skill-tag">Events</span>
+                <span class="skill-tag">Functions</span>
+            </div>
+            <div class="project-time">⏱️ 1-2 hours</div>
+        </div>
+
+        <!-- Project 2 -->
+        <div class="project-card">
+            <div class="project-icon">⚛️</div>
+            <h3>React Concepts</h3>
+            <p>Learn useState, useEffect, Props, Forms, and List Rendering with live examples.</p>
+            <div>
+                <span class="skill-tag">Hooks</span>
+                <span class="skill-tag">State</span>
+                <span class="skill-tag">Props</span>
+            </div>
+            <div class="project-time">⏱️ 2-3 hours</div>
+        </div>
+
+        <!-- Project 3 -->
+        <div class="project-card">
+            <div class="project-icon">🧪</div>
+            <h3>React Basics Experiment</h3>
+            <p>Deep dive into Class vs Functional Components and advanced React patterns.</p>
+            <div>
+                <span class="skill-tag">Components</span>
+                <span class="skill-tag">Hooks</span>
+                <span class="skill-tag">State</span>
+            </div>
+            <div class="project-time">⏱️ 1-2 hours</div>
+        </div>
+
+        <!-- Project 4 -->
+        <div class="project-card">
+            <div class="project-icon">🏫</div>
+            <h3>NBKR Institute Website</h3>
+            <p>Full responsive website with departments, facilities, contact info & smooth scroll.</p>
+            <div>
+                <span class="skill-tag">HTML</span>
+                <span class="skill-tag">CSS</span>
+                <span class="skill-tag">Responsive</span>
+            </div>
+            <div class="project-time">⏱️ Reference</div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== ROADMAP SECTION ===== -->
+<section id="roadmap">
+    <h2>🗺️ Your Learning Journey</h2>
+    <div class="roadmap">
+        <div class="roadmap-item">
+            <div class="roadmap-number">1️⃣</div>
+            <div class="roadmap-content">
+                <h3>JavaScript Fundamentals</h3>
+                <p>Start with JavaScript Lab Programs to master DOM, events, selectors, and function types. Build a strong foundation!</p>
+            </div>
+        </div>
+
+        <div class="roadmap-item">
+            <div class="roadmap-number">2️⃣</div>
+            <div class="roadmap-content">
+                <h3>React Basics Experiment</h3>
+                <p>Explore class components, functional components, hooks, and event handling with interactive examples.</p>
+            </div>
+        </div>
+
+        <div class="roadmap-item">
+            <div class="roadmap-number">3️⃣</div>
+            <div class="roadmap-content">
+                <h3>React Concepts Deep Dive</h3>
+                <p>Master useState, useEffect, Props, Forms, and List Rendering with live API integration examples.</p>
+            </div>
+        </div>
+
+        <div class="roadmap-item">
+            <div class="roadmap-number">4️⃣</div>
+            <div class="roadmap-content">
+                <h3>Build Real Projects</h3>
+                <p>Apply all concepts to create responsive websites. Use NBKR Institute site as a template for your projects.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== SKILLS SECTION ===== -->
+<section id="skills">
+    <h2>🎯 What You'll Master</h2>
+    <div class="skills-container">
+        <div class="skill-box">
+            <h3>🎨 Frontend Fundamentals</h3>
+            <ul>
+                <li>HTML5 & Semantic Structure</li>
+                <li>CSS3 & Responsive Design</li>
+                <li>Flexbox & CSS Grid</li>
+                <li>Mobile-First Approach</li>
+                <li>CSS Animations</li>
+            </ul>
+        </div>
+
+        <div class="skill-box">
+            <h3>⚡ JavaScript (ES6+)</h3>
+            <ul>
+                <li>DOM Manipulation</li>
+                <li>Event Listeners & Handlers</li>
+                <li>Function Types & Scope</li>
+                <li>ES6+ Modern Syntax</li>
+                <li>Array Methods & Promises</li>
+            </ul>
+        </div>
+
+        <div class="skill-box">
+            <h3>⚛️ React 18</h3>
+            <ul>
+                <li>Functional Components</li>
+                <li>Hooks (useState, useEffect)</li>
+                <li>Props & Component Composition</li>
+                <li>Form Handling</li>
+                <li>List Rendering with map()</li>
+            </ul>
+        </div>
+
+        <div class="skill-box">
+            <h3>🛠️ Developer Tools</h3>
+            <ul>
+                <li>VS Code & Extensions</li>
+                <li>Git & GitHub</li>
+                <li>Browser DevTools</li>
+                <li>Node.js & npm</li>
+                <li>Live Server</li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<!-- ===== FEATURES SECTION ===== -->
+<section>
+    <h2>✨ Why Choose Us?</h2>
+    <div class="features-grid">
+        <div class="feature">
+            <div class="feature-icon">📚</div>
+            <h3>Interactive Learning</h3>
+            <p>Live code examples you can modify and experiment with</p>
+        </div>
+
+        <div class="feature">
+            <div class="feature-icon">🎯</div>
+            <h3>Structured Path</h3>
+            <p>Clear progression from basics to advanced concepts</p>
+        </div>
+
+        <div class="feature">
+            <div class="feature-icon">💻</div>
+            <h3>Real Projects</h3>
+            <p>Build complete websites and applications</p>
+        </div>
+
+        <div class="feature">
+            <div class="feature-icon">⚡</div>
+            <h3>Hands-On Labs</h3>
+            <p>5 JavaScript labs + 3 React projects included</p>
+        </div>
+
+        <div class="feature">
+            <div class="feature-icon">🚀</div>
+            <h3>Industry-Ready</h3>
+            <p>Learn tools and concepts used by professionals</p>
+        </div>
+
+        <div class="feature">
+            <div class="feature-icon">✅</div>
+            <h3>Progress Tracking</h3>
+            <p>Track your learning with our progress checklist</p>
+        </div>
+    </div>
+</section>
+
+<!-- ===== PROGRESS TRACKER ===== -->
+<section id="tracker">
+    <h2>✅ Track Your Progress</h2>
+    <div class="tracker">
+        <h3 style="color: var(--primary); margin-bottom: 1.5rem;">📈 Core Concepts</h3>
+        
+        <label class="checkbox-item">
+            <input type="checkbox"> 🧪 JavaScript Lab Programs
+        </label>
+        <label class="checkbox-item">
+            <input type="checkbox"> DOM Manipulation
+        </label>
+        <label class="checkbox-item">
+            <input type="checkbox"> Event Handling
+        </label>
+        <label class="checkbox-item">
+            <input type="checkbox"> Function Types & ES6+
+        </label>
+
+        <h3 style="color: var(--primary); margin-bottom: 1.5rem; margin-top: 2rem;">⚛️ React Mastery</h3>
+        
+        <label class="checkbox-item">
+            <input type="checkbox"> React Basics Experiment
+        </label>
+        <label class="checkbox-item">
+            <input type="checkbox"> useState Hook
+        </label>
+        <label class="checkbox-item">
+            <input type="checkbox"> useEffect Hook
+        </label>
+        <label class="checkbox-item">
+            <input type="checkbox"> Props & Components
+        </label>
+        <label class="checkbox-item">
+            <input type="checkbox"> Form Handling
+        </label>
+        <label class="checkbox-item">
+            <input type="checkbox"> List Rendering (map)
+        </label>
+
+        <h3 style="color: var(--primary); margin-bottom: 1.5rem; margin-top: 2rem;">🏗️ Projects</h3>
+        
+        <label class="checkbox-item">
+            <input type="checkbox"> NBKR Website Analysis
+        </label>
+        <label class="checkbox-item">
+            <input type="checkbox"> Build Responsive Site
+        </label>
+        <label class="checkbox-item">
+            <input type="checkbox"> Deploy on GitHub Pages
+        </label>
+    </div>
+</section>
+
+<!-- ===== RESOURCES SECTION ===== -->
+<section id="resources">
+    <h2>📖 Learning Resources</h2>
+    <div class="skills-container">
+        <div class="skill-box">
+            <h3>📚 Documentation</h3>
+            <ul>
+                <li><a href="https://developer.mozilla.org" target="_blank" style="color: var(--primary); text-decoration: none;">MDN Web Docs</a></li>
+                <li><a href="https://react.dev" target="_blank" style="color: var(--primary); text-decoration: none;">React Official</a></li>
+                <li><a href="https://javascript.info" target="_blank" style="color: var(--primary); text-decoration: none;">JavaScript.info</a></li>
+                <li><a href="https://css-tricks.com" target="_blank" style="color: var(--primary); text-decoration: none;">CSS-Tricks</a></li>
+            </ul>
+        </div>
+
+        <div class="skill-box">
+            <h3>🎥 Video Learning</h3>
+            <ul>
+                <li><a href="https://freecodecamp.org" target="_blank" style="color: var(--primary); text-decoration: none;">freeCodeCamp</a></li>
+                <li><a href="https://codecademy.com" target="_blank" style="color: var(--primary); text-decoration: none;">Codecademy</a></li>
+                <li><a href="https://w3schools.com" target="_blank" style="color: var(--primary); text-decoration: none;">W3Schools</a></li>
+                <li>YouTube Web Dev Channels</li>
+            </ul>
+        </div>
+
+        <div class="skill-box">
+            <h3>🛠️ Tools & Setup</h3>
+            <ul>
+                <li><a href="https://code.visualstudio.com" target="_blank" style="color: var(--primary); text-decoration: none;">VS Code</a></li>
+                <li><a href="https://nodejs.org" target="_blank" style="color: var(--primary); text-decoration: none;">Node.js</a></li>
+                <li><a href="https://git-scm.com" target="_blank" style="color: var(--primary); text-decoration: none;">Git</a></li>
+                <li><a href="https://github.com" target="_blank" style="color: var(--primary); text-decoration: none;">GitHub</a></li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+    <h2>🎉 Ready to Master Web Development?</h2>
+    <p>Start your learning journey today and build amazing web applications!</p>
+    <p style="margin-top: 1.5rem; font-size: 0.9rem;">
+        ⭐ If you find this helpful, please give it a star on GitHub!
+    </p>
+    <div class="social-links">
+        <a href="https://github.com" target="_blank" title="GitHub">🐙</a>
+        <a href="https://twitter.com" target="_blank" title="Twitter">𝕏</a>
+        <a href="https://linkedin.com" target="_blank" title="LinkedIn">💼</a>
+    </div>
+    <p style="margin-top: 2rem; font-size: 0.85rem; opacity: 0.8;">
+        💫 Created by Sk Arif | September 2026 | Never Stop Learning 🚀
+    </p>
+</footer>
+
+<!-- ===== SCROLL TO TOP BUTTON ===== -->
+<button class="scroll-top" id="scrollTop">↑</button>
+
+<script>
+    // Scroll to Top Functionality
+    const scrollTopBtn = document.getElementById('scrollTop');
+
+    window.addEventListener('scroll', () => {
+        if (window.pageYOffset > 300) {
+            scrollTopBtn.classList.add('show');
+        } else {
+            scrollTopBtn.classList.remove('show');
+        }
+    });
+
+    scrollTopBtn.addEventListener('click', () => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    });
+
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({ behavior: 'smooth' });
+            }
+        });
+    });
+
+    // Progress tracker persistence
+    document.querySelectorAll('.checkbox-item input').forEach(checkbox => {
+        const label = checkbox.closest('.checkbox-item').textContent.trim();
+        checkbox.checked = localStorage.getItem(label) === 'true';
+
+        checkbox.addEventListener('change', () => {
+            localStorage.setItem(label, checkbox.checked);
+        });
+    });
+</script>
+
+</body>
+</html>
