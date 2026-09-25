@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>React Basics Experiment</title>
+  <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin-top: 20px;
+    }
+    .box {
+      border: 1px solid #ccc;
+      padding: 15px;
+      margin: 10px auto;
+      width: 300px;
+      border-radius: 8px;
+      background-color: #f9f9f9;
+    }
+    button {
+      padding: 8px 12px;
+      margin-top: 10px;
+      cursor: pointer;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 4px;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <h2>React Basics Experiment</h2>
+  <div id="root"></div>
+
+  <script type="text/babel">
+    class ClassCounter extends React.Component {
+      constructor(props) {
+        super(props);
+        this.state = { count: 0 };
+      }
+      increment = () => {
+        this.setState({ count: this.state.count + 1 });
+      };
+      render() {
+        return (
+          <div className="box">
+            <h3>Class Counter: {this.state.count}</h3>
+            <button onClick={this.increment}>Increment</button>
+          </div>
+        );
+      }
+    }
+
+    function FunctionalCounter() {
+      const [count, setCount] = React.useState(0);
+      return (
+        <div className="box">
+          <h3>Functional Counter: {count}</h3>
+          <button onClick={() => setCount(count + 1)}>Increment</button>
+        </div>
+      );
+    }
+
+    function ClickHandler() {
+      const handleClick = () => {
+        alert("Button was clicked!");
+      };
+      return (
+        <div className="box">
+          <h3>Click Handler Example</h3>
+          <button onClick={handleClick}>Click Me</button>
+        </div>
+      );
+    }
+
+    function ConditionalRender({ show }) {
+      return (
+        <div className="box">
+          <h3>Conditional Rendering Example</h3>
+          {show ? <p>This text is visible!</p> : <p>Hidden text</p>}
+        </div>
+      );
+    }
+
+    function StringLiteralExample() {
+      const name = "React Learner";
+      return (
+        <div className="box">
+          <h3>String Literal Example</h3>
+          <p>{`Hello, ${name}! Welcome to React basics.`}</p>
+        </div>
+      );
+    }
+
+    function App() {
+      return (
+        <div>
+          <ClassCounter />
+          <FunctionalCounter />
+          <ClickHandler />
+          <ConditionalRender show={true} />
+          <StringLiteralExample />
+        </div>
+      );
+    }
+
+    const root = ReactDOM.createRoot(document.getElementById("root"));
+    root.render(<App />);
+  </script>
+</body>
+</html>
